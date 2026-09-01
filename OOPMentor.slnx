@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/CLAUDE/">
+    <File Path="CLAUDE.md" />
+  </Folder>
+  <Project Path="OOPMentor.Api/OOPMentor.Api.csproj" Id="3f5085e6-df3c-4d5f-9056-037df86f9b98" />
+  <Project Path="OOPMentor.Application/OOPMentor.Application.csproj" />
+  <Project Path="OOPMentor.Domain/OOPMentor.Domain.csproj" />
+  <Project Path="OOPMentor.Infrastructure/OOPMentor.Infrastructure.csproj" />
+</Solution>

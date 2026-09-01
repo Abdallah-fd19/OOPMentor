@@ -1,0 +1,16 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Data Source=localhost\\SQLEXPRESS;Initial Catalog=OOPMentorDb;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"
+  },
+  "Jwt": {
+    "Issuer": "OOPMentor",
+    "Audience": "OOPMentorClient",
+    "SigningKey": "REPLACE_WITH_A_STRONG_SECRET_MINIMUM_32_CHARS"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
