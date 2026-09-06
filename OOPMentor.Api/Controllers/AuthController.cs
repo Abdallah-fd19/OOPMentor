@@ -76,11 +76,16 @@ namespace OOPMentor.Api.Controllers
         }
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> Refresh(RefreshRequest request)
+        public async Task<IActionResult> Refresh()
         {
+            if (!Request.Cookies.TryGetValue("refreshToken", out var refreshTokenValue))
+            {
+                return Unauthorized(Result<AuthResponse>.Fail("No refresh token provided."));
+            }
+
             var existingToken = await _db.RefreshTokens
                 .Include(rt => rt.User)
-                .FirstOrDefaultAsync(rt => rt.Token == request.RefreshToken);
+                .FirstOrDefaultAsync(rt => rt.Token == refreshTokenValue);
 
             if (existingToken is null || existingToken.IsRevoked || existingToken.ExpiresAtUtc < DateTime.UtcNow)
             {
@@ -110,7 +115,15 @@ namespace OOPMentor.Api.Controllers
             _db.RefreshTokens.Add(refreshToken);
             await _db.SaveChangesAsync();
 
-            return new AuthResponse(accessToken, refreshToken.Token, user.Email, user.DisplayName);
+            Response.Cookies.Append("refreshToken", refreshToken.Token, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = refreshToken.ExpiresAtUtc
+            });
+
+            return new AuthResponse(accessToken, user.Email, user.DisplayName);
         }
 
         private static string GenerateSecureRandomToken()

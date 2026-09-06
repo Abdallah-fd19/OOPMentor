@@ -1,1 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,400..700&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --color-ink: #14171c;
+  --color-panel: #1b1f27;
+  --color-panel-raised: #20242e;
+  --color-line: #2e3542;
+  --color-paper: #e8e6df;
+  --color-steel: #7c8798;
+  --color-ignition: #f2a93c;
+  --color-rust: #e2685a;
+  --color-sage: #7fb88f;
+
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+  }
+}
+
+@keyframes auth-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes auth-ghosts-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes auth-divider {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .anim-auth-card {
+    animation: auth-card-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .anim-auth-ghosts {
+    animation: auth-ghosts-in 1.2s ease-out 0.2s both;
+  }
+
+  .anim-auth-divider {
+    animation: auth-divider 0.5s ease-out both;
+  }
+}
