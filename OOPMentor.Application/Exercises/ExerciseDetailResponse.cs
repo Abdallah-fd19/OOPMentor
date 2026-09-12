@@ -24,4 +24,13 @@ namespace OOPMentor.Application.Exercises
     string? LastSubmittedCode
     );
 
+    public sealed record ExerciseSummaryResponse
+    (
+        Guid Id,
+        string Title,
+        byte DifficultyLevel,
+        int OrderIndex,
+        bool IsCompleted
+    );
+
 }

@@ -47,5 +47,34 @@ namespace OOPMentor.Api.Controllers
             
             return Ok(Result<List<ModuleSummaryResponse>>.Ok(modules));
         }
+
+        [HttpGet("{moduleNumber:int}/exercises")]
+        public async Task<IActionResult> GetModuleExercises(int moduleNumber)
+        {
+
+            Guid userId = Guid.Parse(User.FindFirst(JwtRegisteredClaimNames.Sub)!.Value);
+
+            var moduleExercises = await _db.Exercises
+                .Where(e => e.ModuleNumber == moduleNumber)
+                .OrderBy(e => e.OrderIndex)
+                .ToListAsync();
+
+            var completedExerciseIds = await _db.UserProgress
+                .Where(p => p.UserId == userId && p.IsCompleted)
+                .Select(p => p.ExerciseId)
+                .ToListAsync();
+
+            var response = moduleExercises
+                .Select(e => new ExerciseSummaryResponse(
+                    e.Id,
+                    e.Title,
+                    e.DifficultyLevel,
+                    e.OrderIndex,
+                    completedExerciseIds.Contains(e.Id)))
+                .ToList();
+
+            return Ok(Result<List<ExerciseSummaryResponse>>.Ok(response));   
+        }
     }
+    
 }
