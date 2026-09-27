@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OOPMentor.Application.Auth;
+using OOPMentor.Application.Sandbox;
+using OOPMentor.Infrastructure.Sandbox;
 using OOPMentor.Infrastructure.Auth;
 using OOPMentor.Infrastructure.Persistence;
 using System.Text;
@@ -51,6 +53,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+
+builder.Services.AddScoped<ICodeSandBox, RoslynSandboxExecutor>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

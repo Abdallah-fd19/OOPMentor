@@ -11,7 +11,7 @@ export interface ExerciseProgress{
     attemptsCount: number;
     hintsUsedCount: number;
     isCompleted: boolean;
-    lastSubmittedCode: string;
+    lastSubmittedCode: string | null;
 }
 
 
@@ -23,4 +23,20 @@ export interface ExerciseDetail{
     starterCode: string;
     difficultyLevel: number;
     exerciseProgress: ExerciseProgress | null;
+}
+
+// api/exercises/exercise:id/submit
+
+export interface SubmitProgress {
+    status: string;
+    attemptsCount: number;
+    isCompleted: boolean;
+    completedAtUtc: string | null;
+}
+
+export interface SubmitExerciseResponse {
+    isCorrect: boolean;
+    consoleOutput: string[];
+    compilationDiagnostics: string[];
+    progress: SubmitProgress;
 }
