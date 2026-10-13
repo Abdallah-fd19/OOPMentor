@@ -68,7 +68,37 @@
   }
 }
 
+@keyframes road-scroll {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 28;
+  }
+}
+
+@keyframes wheel-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
+  .anim-road-scroll {
+    animation-name: road-scroll;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  .anim-wheel-spin {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wheel-spin 0.6s linear infinite;
+  }
+
   .anim-auth-card {
     animation: auth-card-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
   }

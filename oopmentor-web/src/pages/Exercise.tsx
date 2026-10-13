@@ -5,6 +5,7 @@ import { type SandboxExecutionResult, type SandboxRunRequest } from "../api/sand
 import { Link, useParams } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import SessionLoader from "../components/auth/SessionLoader";
+import CarVisualizer from "../components/exercise/CarVisualizer";
 
 const DIFFICULTY_LABELS: Record<number, string> = {
     1: "Beginner",
@@ -193,9 +194,17 @@ export default function Exercise() {
                     </div>
                 )}
 
+                {submitResult && !runResult && (
+                    <div className="mb-6">
+                        <CarVisualizer objects={submitResult.finalState} />
+                    </div>
+                )}
+
 
                 {runResult && (
                     <div className="space-y-4">
+                        <CarVisualizer objects={runResult.finalState} />
+
                         <div>
                             <p className="mb-2 font-mono text-xs text-steel">
                                 Console output · {runResult.executionTimeMs}ms
