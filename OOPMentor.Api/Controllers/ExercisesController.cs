@@ -95,6 +95,7 @@ namespace OOPMentor.Api.Controllers
             var response = new SubmitExerciseResponse(
                 sandboxResult.Success,
                 sandboxResult.ConsoleOutput,
+                sandboxResult.FinalState,
                 sandboxResult.CompilationDiagnostics,
                 new SubmitProgressResponse(
                     progress.Status.ToString(),

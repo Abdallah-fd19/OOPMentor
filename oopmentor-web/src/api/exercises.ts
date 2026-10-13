@@ -1,3 +1,5 @@
+import type { SandboxObjectState } from "./sandbox";
+
 export interface ExerciseSummary{
     id: string;
     title: string;
@@ -39,4 +41,5 @@ export interface SubmitExerciseResponse {
     consoleOutput: string[];
     compilationDiagnostics: string[];
     progress: SubmitProgress;
+    finalState: SandboxObjectState[];
 }

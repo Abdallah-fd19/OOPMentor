@@ -1,3 +1,5 @@
+using OOPMentor.Application.Sandbox;
+
 namespace OOPMentor.Application.Exercises
 {
     public sealed record SubmitExerciseRequest(string SourceCode);
@@ -6,6 +8,7 @@ namespace OOPMentor.Application.Exercises
     (
         bool IsCorrect,
         IReadOnlyList<string> ConsoleOutput,
+        IReadOnlyList<SandboxObjectState> FinalState,
         IReadOnlyList<string> CompilationDiagnostics,
         SubmitProgressResponse Progress
     );
